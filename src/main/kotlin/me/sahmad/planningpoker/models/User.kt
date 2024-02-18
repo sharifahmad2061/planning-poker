@@ -1,4 +1,4 @@
-package me.sahmad.planningpoker.model
+package me.sahmad.planningpoker.models
 
 import java.util.UUID
 import kotlinx.serialization.Serializable

@@ -7,7 +7,7 @@ import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
-import me.sahmad.planningpoker.model.CreateSessionRequest
+import me.sahmad.planningpoker.models.CreateSessionRequest
 
 fun Application.sessionRoutes() {
     routing {

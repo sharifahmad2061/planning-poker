@@ -1,4 +1,4 @@
-package me.sahmad.planningpoker.model
+package me.sahmad.planningpoker.models
 
 import kotlinx.serialization.Serializable
 
@@ -6,3 +6,4 @@ import kotlinx.serialization.Serializable
 data class CreateSessionRequest(
     val name: String
 )
+
