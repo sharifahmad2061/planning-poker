@@ -7,10 +7,10 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 
-fun Application.main() {
+fun main() {
     embeddedServer(Netty, 8080) {
         install(ContentNegotiation) {
             json()
         }
-    }
+    }.start(wait = true)
 }
