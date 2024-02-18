@@ -8,9 +8,11 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 
 fun main() {
-    embeddedServer(Netty, 8080) {
-        install(ContentNegotiation) {
-            json()
-        }
-    }.start(wait = true)
+    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+}
+
+fun Application.module() {
+    install(ContentNegotiation) {
+        json()
+    }
 }
