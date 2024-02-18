@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.22"
     id("io.ktor.plugin") version "2.3.8"
     application
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
 group = "me.sahmad"
