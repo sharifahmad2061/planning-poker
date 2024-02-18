@@ -1,20 +1,14 @@
 package me.sahmad.planningpoker
 
-import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
-import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import me.sahmad.planningpoker.routes.sessionRoutes
+import me.sahmad.planningpoker.plugins.configureRouting
+import me.sahmad.planningpoker.plugins.configureSerialization
 
-fun main() {
-    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
-}
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
-    install(ContentNegotiation) {
-        json()
-    }
-    sessionRoutes()
+    configureRouting()
+    configureSerialization()
 }
