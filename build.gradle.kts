@@ -9,6 +9,10 @@ plugins {
 group = "me.sahmad"
 version = "1.0-SNAPSHOT"
 
+application {
+    mainClass.set("io.ktor.server.netty.EngineMain")
+}
+
 repositories {
     mavenCentral()
 }
