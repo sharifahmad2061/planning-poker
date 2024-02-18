@@ -8,5 +8,5 @@ import me.sahmad.planningpoker.serde.UUIDSerializer
 data class User(
     val name: String,
     @Serializable(with = UUIDSerializer::class)
-    val userId: UUID?,
+    val userId: UUID,
 )
