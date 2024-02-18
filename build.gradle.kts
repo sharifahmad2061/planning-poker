@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.22"
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 group = "me.sahmad"
@@ -10,6 +11,13 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    implementation("io.ktor:ktor-server-core-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-netty-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.8")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.8")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
