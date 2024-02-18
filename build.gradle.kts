@@ -13,13 +13,15 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.22")
 
     implementation("io.ktor:ktor-server-core:2.3.8")
     implementation("io.ktor:ktor-server-netty:2.3.8")
     implementation("io.ktor:ktor-server-content-negotiation:2.3.8")
     implementation("io.ktor:ktor-server-websockets:2.3.8")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.8")
+
+    implementation("ch.qos.logback:logback-classic:1.5.0")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
@@ -30,8 +32,4 @@ tasks.test {
 
 kotlin {
     jvmToolchain(21)
-}
-
-application {
-    mainClass.set("me.sahmad.ApplicationKt")
 }
