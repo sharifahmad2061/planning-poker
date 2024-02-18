@@ -1,8 +1,8 @@
 package me.sahmad.planningpoker.models
 
-import java.util.UUID
 import kotlinx.serialization.Serializable
 import me.sahmad.planningpoker.serde.UUIDSerializer
+import java.util.UUID
 
 @Serializable
 data class CreateSessionResponse(

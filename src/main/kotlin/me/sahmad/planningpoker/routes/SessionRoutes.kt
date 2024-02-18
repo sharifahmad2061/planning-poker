@@ -8,16 +8,16 @@ import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
-import java.util.UUID
 import me.sahmad.planningpoker.models.CreateSessionRequest
 import me.sahmad.planningpoker.models.CreateSessionResponse
 import me.sahmad.planningpoker.models.SessionStorage
 import me.sahmad.planningpoker.models.User
+import java.util.UUID
 
 fun Application.sessionRoutes() {
     routing {
         createSessionRoute()
-     }
+    }
 }
 
 fun Route.createSessionRoute() {
@@ -30,6 +30,6 @@ fun Route.createSessionRoute() {
             SessionStorage.sessions[sessionId] = listOf(user)
             call.respond(CreateSessionResponse(sessionId))
             return@post
-         }
+        }
     }
 }
