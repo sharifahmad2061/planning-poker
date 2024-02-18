@@ -1,6 +1,7 @@
 package me.sahmad.planningpoker.serde
 
-import java.util.UUIDimport kotlinx.serialization.KSerializer
+import java.util.UUID
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
