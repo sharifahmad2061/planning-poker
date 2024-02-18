@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.serialization") version "1.9.22"
+    id("io.ktor.plugin") version "2.3.8"
     application
 }
 
@@ -14,8 +15,8 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    implementation("io.ktor:ktor-server-core-jvm:2.3.8")
-    implementation("io.ktor:ktor-server-netty-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-core:2.3.8")
+    implementation("io.ktor:ktor-server-netty:2.3.8")
     implementation("io.ktor:ktor-server-content-negotiation:2.3.8")
     implementation("io.ktor:ktor-server-websockets:2.3.8")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.8")
