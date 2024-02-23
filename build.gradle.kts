@@ -26,6 +26,8 @@ dependencies {
     implementation("io.ktor:ktor-server-websockets-jvm:2.3.8")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.3.8")
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-request-validation:2.3.8")
+    implementation("io.ktor:ktor-server-html-builder:2.3.8")
 
     implementation("ch.qos.logback:logback-classic:1.5.0")
 
