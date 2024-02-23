@@ -1,9 +1,15 @@
 package me.sahmad.planningpoker.routes
 
 import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.plugins.requestvalidation.RequestValidation
+import io.ktor.server.plugins.requestvalidation.ValidationResult
 import io.ktor.server.application.call
+import io.ktor.server.html.respondHtml
 import io.ktor.server.request.receive
+import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
@@ -24,20 +30,24 @@ fun Application.createSessionRoutes() {
 fun Route.sessionRoutes() {
     route("/session") {
         post {
-            val request: CreateSessionRequest = call.receive<CreateSessionRequest>()
-            val sessionId = UUID.randomUUID()
-            val userId = UUID.randomUUID()
-            val user = User(name = request.name, userId = userId)
-            SessionStorage.sessions[sessionId] = listOf(user)
-            call.respond(CreateSessionResponse(sessionId))
+            val name: String? = call.receiveParameters()["name"]
+            if (name.isNullOrEmpty() or name!!.isBlank()) call.respondRedirect("/", permanent = false)
+            else {
+                val sessionId = UUID.randomUUID()
+                val userId = UUID.randomUUID()
+                val user = User(name = name, userId = userId)
+                SessionStorage.sessions[sessionId] = listOf(user)
+                call.respondRedirect("/session/${sessionId}", permanent = false)
+            }
             return@post
         }
         get ("/{sessionId}") {
-            val sessionId: Result<UUID> = runCatching {
-                UUID.fromString(call.parameters["sessionId"])
-            }
-            val userId: Result<UUID> = sessionId.mapCatching { _ -> UUID.randomUUID() }
-            val user = User(userId = userId.getOrThrow())
+            val sessionId:UUID = UUID.fromString(call.parameters["sessionId"])
+            if (SessionStorage.sessions.containsKey(sessionId)) call.respondHtml {
+
+             }
+            else call.respondRedirect("/", permanent = false) // session doesn't exist
+            return@get
         }
     }
 }
