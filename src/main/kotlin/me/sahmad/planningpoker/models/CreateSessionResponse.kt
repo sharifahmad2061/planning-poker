@@ -5,7 +5,8 @@ import me.sahmad.planningpoker.serde.UUIDSerializer
 import java.util.UUID
 
 @Serializable
-data class CreateSessionResponse(
-    @Serializable(with = UUIDSerializer::class)
-    val sessionId: UUID,
-)
+sealed interface CreateSessionResponse {
+    data class Success (@Serializable(with = UUIDSerializer::class) val sessionId: UUID): CreateSessionResponse
+    data class Error (val message: String): CreateSessionResponse
+}
+
