@@ -12,7 +12,6 @@ import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import io.ktor.server.sessions.sessions
 import io.ktor.server.sessions.set
-import java.util.UUID
 import kotlinx.html.FormEncType
 import kotlinx.html.FormMethod
 import kotlinx.html.body
@@ -23,6 +22,7 @@ import kotlinx.html.p
 import kotlinx.html.submitInput
 import kotlinx.html.textInput
 import me.sahmad.planningpoker.common.models.User
+import java.util.UUID
 
 fun Application.createHomePageRoutes() {
     routing {
@@ -45,7 +45,7 @@ fun Route.homePageRoutes() {
                         }
                         if (!origin.isNullOrBlank()) {
                             p {
-                                hiddenInput (name = "origin") { value = origin }
+                                hiddenInput(name = "origin") { value = origin }
                             }
                         }
                         p {
@@ -58,8 +58,9 @@ fun Route.homePageRoutes() {
         }
         post {
             val name: String? = call.receiveParameters()["name"]
-            if (name.isNullOrBlank()) call.respondRedirect("/", permanent = false)
-            else {
+            if (name.isNullOrBlank()) {
+                call.respondRedirect("/", permanent = false)
+            } else {
                 val user: User = User(name = name, id = UUID.randomUUID())
                 call.sessions.set(user)
             }

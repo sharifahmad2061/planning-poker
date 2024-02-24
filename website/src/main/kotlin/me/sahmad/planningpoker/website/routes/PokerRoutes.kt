@@ -8,11 +8,10 @@ import io.ktor.server.websocket.webSocket
 fun Application.createPokerRoutes() {
     routing {
         pokerRoutes()
-     }
+    }
 }
 
 fun Route.pokerRoutes() {
     webSocket("/poker") {
-
     }
 }
