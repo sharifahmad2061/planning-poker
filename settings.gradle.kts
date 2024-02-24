@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "planning-poker"
 include("website")
+include("common")
