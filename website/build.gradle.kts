@@ -18,6 +18,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":common"))
+
     implementation("io.ktor:ktor-server-core-jvm:2.3.8")
     implementation("io.ktor:ktor-server-netty-jvm:2.3.8")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:2.3.8")
