@@ -38,16 +38,32 @@ fun Route.homePageRoute() {
                     h3 {
                         +"Create a new Session"
                     }
-                    form (action = "/session", method = FormMethod.post, encType = FormEncType.applicationXWwwFormUrlEncoded) {
+                    form(action = "/session", method = FormMethod.post, encType = FormEncType.applicationXWwwFormUrlEncoded) {
                         p {
                             +"Name:"
-                            textInput (name = "name")
-                         }
-                        p {
-                            submitInput { value = "Create Session" }
+                            textInput(name = "name")
                         }
-                     }
-                 }
+                        p {
+                            submitInput (name = "submit") { value = "Create Session" }
+                        }
+                    }
+                    h3 {
+                        +"Join an existing session"
+                    }
+                    form(action = "/session", method = FormMethod.post, encType = FormEncType.applicationXWwwFormUrlEncoded) {
+                        p {
+                            +"Session ID:"
+                            textInput(name = "sessionId")
+                        }
+                        p {
+                            +"Name:"
+                            textInput(name = "name")
+                        }
+                        p {
+                            submitInput (name = "submit") { value = "Join Session" }
+                        }
+                    }
+                }
             }
         }
     }
