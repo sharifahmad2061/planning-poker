@@ -3,6 +3,7 @@ package me.sahmad.planningpoker.routes
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
+import io.ktor.server.html.respondHtml
 import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
@@ -77,12 +78,15 @@ fun Route.sessionRoutes() {
         }
         get("/{sessionId}") {
             val sessionId: UUID = UUID.fromString(call.parameters["sessionId"])
+            val session: Session? = SessionStorage.sessions[sessionId]
             val user: User? = call.sessions.get<User>()
-            if (user == null) {
+            val userHasJoinedTheSession: Boolean = session?.users?.contains(user) ?: false
+            if (session == null || user == null || !userHasJoinedTheSession) {
                 call.respondRedirect("/")
             } else {
+                call.respondHtml(HttpStatusCode.OK) {
 
-
+                }
             }
             return@get
         }
