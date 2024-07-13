@@ -18,6 +18,7 @@ import me.sahmad.planningpoker.models.CreateSessionResponse
 import me.sahmad.planningpoker.models.SessionStorage
 import me.sahmad.planningpoker.models.User
 import java.util.UUID
+import me.sahmad.planningpoker.models.Session
 
 fun Application.createSessionRoutes() {
     routing {
@@ -42,7 +43,7 @@ fun Route.sessionRoutes() {
                         val userId = UUID.randomUUID()
                         val user = User(name = name, userId = userId)
                         call.sessions.set(user)
-                        SessionStorage.sessions[sessionId] = listOf(user)
+                        SessionStorage.sessions[sessionId] = Session(users = listOf(user))
                         call.respondRedirect("/$sessionId")
                     }
                 }
@@ -58,8 +59,17 @@ fun Route.sessionRoutes() {
                         val userId = UUID.randomUUID()
                         val user = User(name = name, userId = userId)
                         call.sessions.set(user)
-                        SessionStorage.sessions[sessionId] = SessionStorage.sessions[sessionId]!! + user
-                        call.respondRedirect("/$sessionId")
+                        val session = SessionStorage.sessions[sessionId]
+                        if (session == null) {
+                            call.respondRedirect("/")
+                        } else {
+                            if (session.users.contains(user)) {
+                                call.respondRedirect("/$sessionId")
+                            } else {
+                                SessionStorage.sessions[sessionId] = session.copy(users = session.users + user)
+                                call.respondRedirect("/$sessionId")
+                            }
+                        }
                     }
                 }
             }
