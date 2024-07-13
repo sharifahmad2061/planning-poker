@@ -3,7 +3,6 @@ package me.sahmad.planningpoker.routes
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
-import io.ktor.server.html.respondHtml
 import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
@@ -15,13 +14,6 @@ import io.ktor.server.routing.routing
 import io.ktor.server.sessions.get
 import io.ktor.server.sessions.sessions
 import io.ktor.server.sessions.set
-import kotlinx.html.FormEncType
-import kotlinx.html.FormMethod
-import kotlinx.html.body
-import kotlinx.html.form
-import kotlinx.html.p
-import kotlinx.html.submitInput
-import kotlinx.html.textInput
 import me.sahmad.planningpoker.models.CreateSessionResponse
 import me.sahmad.planningpoker.models.SessionStorage
 import me.sahmad.planningpoker.models.User
@@ -80,21 +72,9 @@ fun Route.sessionRoutes() {
                 call.respondRedirect("/")
             } else {
 
+
             }
             return@get
-        }
-        post("/{sessionId}") {
-            val sessionId: UUID = UUID.fromString(call.parameters["sessionId"])
-            if (!SessionStorage.sessions.containsKey(sessionId)) call.respondRedirect("/session", permanent = false)
-            val name: String? = call.receiveParameters()["name"]
-            if (name.isNullOrEmpty() or name!!.isBlank()) {
-                call.respondRedirect("/$sessionId")
-            } else {
-                val user = User(name = name, userId = UUID.randomUUID())
-                call.sessions.set(user)
-                SessionStorage.sessions[sessionId] = SessionStorage.sessions[sessionId]!! + user
-                call.respondRedirect("/$sessionId", permanent = false)
-            }
         }
     }
 }
