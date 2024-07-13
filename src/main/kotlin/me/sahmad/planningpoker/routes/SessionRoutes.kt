@@ -19,6 +19,9 @@ import me.sahmad.planningpoker.models.CreateSessionResponse
 import me.sahmad.planningpoker.models.SessionStorage
 import me.sahmad.planningpoker.models.User
 import java.util.UUID
+import kotlinx.html.body
+import kotlinx.html.h3
+import kotlinx.html.p
 import me.sahmad.planningpoker.models.Session
 
 fun Application.createSessionRoutes() {
@@ -45,7 +48,7 @@ fun Route.sessionRoutes() {
                         val user = User(name = name, userId = userId)
                         call.sessions.set(user)
                         SessionStorage.sessions[sessionId] = Session(users = listOf(user))
-                        call.respondRedirect("/$sessionId")
+                        call.respondRedirect("/session/$sessionId")
                     }
                 }
                 "Join Session" -> {
@@ -65,10 +68,10 @@ fun Route.sessionRoutes() {
                             call.respondRedirect("/")
                         } else {
                             if (session.users.contains(user)) {
-                                call.respondRedirect("/$sessionId")
+                                call.respondRedirect("/session/$sessionId")
                             } else {
                                 SessionStorage.sessions[sessionId] = session.copy(users = session.users + user)
-                                call.respondRedirect("/$sessionId")
+                                call.respondRedirect("/session/$sessionId")
                             }
                         }
                     }
@@ -85,7 +88,14 @@ fun Route.sessionRoutes() {
                 call.respondRedirect("/")
             } else {
                 call.respondHtml(HttpStatusCode.OK) {
-
+                    body {
+                        h3 {
+                            +"Session: $sessionId"
+                         }
+                         p {
+                             +"Users: ${session.users.joinToString { it.name }}"
+                          }
+                     }
                 }
             }
             return@get
