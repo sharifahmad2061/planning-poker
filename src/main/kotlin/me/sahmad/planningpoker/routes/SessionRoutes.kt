@@ -45,7 +45,7 @@ fun Route.sessionRoutes() {
                     } else {
                         val sessionId = UUID.randomUUID()
                         val userId = UUID.randomUUID()
-                        val user = User(name = name, userId = userId)
+                        val user = User(name = name, userId = userId, isLeader = true)
                         call.sessions.set(user)
                         SessionStorage.sessions[sessionId] = Session(users = listOf(user))
                         call.respondRedirect("/session/$sessionId")
@@ -55,24 +55,18 @@ fun Route.sessionRoutes() {
                     val name: String? = parameters["name"]
                     val sessionId: String? = parameters["sessionId"]
                     if (name.isNullOrEmpty() or sessionId.isNullOrEmpty() or name!!.isBlank() or sessionId!!.isBlank()) {
-                        call.respond(HttpStatusCode.BadRequest) {
-                            CreateSessionResponse.Error("name and sessionId can't be empty")
-                        }
+                        call.respondRedirect("/")
                     } else {
                         val sessionId = UUID.fromString(sessionId)
-                        val userId = UUID.randomUUID()
-                        val user = User(name = name, userId = userId)
-                        call.sessions.set(user)
                         val session = SessionStorage.sessions[sessionId]
                         if (session == null) {
                             call.respondRedirect("/")
                         } else {
-                            if (session.users.contains(user)) {
-                                call.respondRedirect("/session/$sessionId")
-                            } else {
-                                SessionStorage.sessions[sessionId] = session.copy(users = session.users + user)
-                                call.respondRedirect("/session/$sessionId")
-                            }
+                            val userId = UUID.randomUUID()
+                            val user = User(name = name, userId = userId)
+                            call.sessions.set(user)
+                            SessionStorage.sessions[sessionId] = session.copy(users = session.users + user)
+                            call.respondRedirect("/session/$sessionId")
                         }
                     }
                 }
