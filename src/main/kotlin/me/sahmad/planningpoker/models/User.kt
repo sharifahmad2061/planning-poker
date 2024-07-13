@@ -6,7 +6,8 @@ import java.util.UUID
 
 @Serializable
 data class User(
-    val name: String? = null,
+    val name: String,
     @Serializable(with = UUIDSerializer::class)
     val userId: UUID,
+    val isLeader: Boolean? = false
 )
