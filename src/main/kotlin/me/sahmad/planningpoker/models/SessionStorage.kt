@@ -7,8 +7,8 @@ object SessionStorage {
 }
 
 data class Session (
-    val users: List<User> = listOf(),
-    val pokerRounds: List<PokerRound> = listOf()
+    val users: List<User> = emptyList(),
+    val pokerRounds: List<PokerRound> = emptyList()
 )
 
 data class PokerRound (
