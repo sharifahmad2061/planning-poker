@@ -1,4 +1,4 @@
-package me.sahmad.planningpoker.website.plugins
+package me.sahmad.planningpoker.plugins
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
