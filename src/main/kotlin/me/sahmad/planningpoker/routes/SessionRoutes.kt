@@ -21,7 +21,10 @@ import me.sahmad.planningpoker.models.User
 import java.util.UUID
 import kotlinx.html.body
 import kotlinx.html.h3
+import kotlinx.html.head
 import kotlinx.html.p
+import kotlinx.html.script
+import kotlinx.html.title
 import me.sahmad.planningpoker.models.Session
 
 fun Application.createSessionRoutes() {
@@ -82,6 +85,10 @@ fun Route.sessionRoutes() {
                 call.respondRedirect("/")
             } else {
                 call.respondHtml(HttpStatusCode.OK) {
+                    head {
+                        title { +"Planning Poker" }
+                        script { src = "/static/js/main.js" }
+                     }
                     body {
                         h3 {
                             +"Session: $sessionId"
