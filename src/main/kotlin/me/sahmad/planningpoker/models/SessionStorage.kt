@@ -8,15 +8,15 @@ object SessionStorage {
 
 data class Session (
     val users: List<User> = emptyList(),
-    val pokerRounds: List<PokerRound> = emptyList()
+    val completedPokerRounds: List<PokerRound> = emptyList(),
 )
 
 data class PokerRound (
-    val roundName: String,
+    val storyName: String,
     val votes: List<Vote> = listOf()
 )
 
 data class Vote (
     val user: User,
-    val vote: Int
+    val estimate: Int
 )
