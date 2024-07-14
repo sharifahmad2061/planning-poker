@@ -78,7 +78,11 @@ fun Route.sessionRoutes() {
             if (session == null || user == null || !userHasJoinedTheSession) {
                 call.respondRedirect("/")
             } else {
-                call.respond(PebbleContent("session.html", mapOf("session" to session, "user" to user)))
+                call.respond(
+                    PebbleContent("session.peb",
+                     mapOf("sessionId" to sessionId, "session" to session, "user" to user)
+                    )
+                )
             }
             return@get
         }
