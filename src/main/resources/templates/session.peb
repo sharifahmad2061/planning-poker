@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Planning Poker Session</title>
+    <script src="/static/js/main.js"></script>
+</head>
+<body>
+    <p>Session ID: {{sessionId}}</p>
+    {% if user.isLeader %}
+    <form id="new-round-form">
+        <input type="text" id="story-name" placeholder="Story Name" />
+        <button type="submit">Start Vote</button>
+    </form>
+    {% endif %}
+    <!-- current round -->
+    <form id="current-round-form" style="display:none">
+        <label for="estimate" id="for-estimate">Story Name</label>
+        <input type="number" id="estimate" placeholder="Enter your estimate" />
+        <button type="submit">Submit</button>
+    </form>
+    <!-- past rounds -->
+    <ul id="past-rounds">
+    </ul>
+</body>
+</html>
