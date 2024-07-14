@@ -3,7 +3,7 @@ package me.sahmad.planningpoker.routes
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
-import io.ktor.server.html.respondHtml
+import io.ktor.server.pebble.PebbleContent
 import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
@@ -19,12 +19,6 @@ import me.sahmad.planningpoker.models.CreateSessionResponse
 import me.sahmad.planningpoker.models.SessionStorage
 import me.sahmad.planningpoker.models.User
 import java.util.UUID
-import kotlinx.html.body
-import kotlinx.html.h3
-import kotlinx.html.head
-import kotlinx.html.p
-import kotlinx.html.script
-import kotlinx.html.title
 import me.sahmad.planningpoker.models.Session
 
 fun Application.createSessionRoutes() {
@@ -84,20 +78,7 @@ fun Route.sessionRoutes() {
             if (session == null || user == null || !userHasJoinedTheSession) {
                 call.respondRedirect("/")
             } else {
-                call.respondHtml(HttpStatusCode.OK) {
-                    head {
-                        title { +"Planning Poker" }
-                        script { src = "/static/js/main.js" }
-                     }
-                    body {
-                        h3 {
-                            +"Session: $sessionId"
-                         }
-                         p {
-                             +"Users: ${session.users.joinToString { it.name }}"
-                          }
-                     }
-                }
+                call.respond(PebbleContent("session.html", mapOf("session" to session, "user" to user)))
             }
             return@get
         }
