@@ -29,6 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-server-request-validation:2.3.8")
     implementation("io.ktor:ktor-server-html-builder:2.3.8")
     implementation("io.ktor:ktor-server-sessions:2.3.8")
+    implementation("io.ktor:ktor-server-pebble:2.3.8")
 
     implementation("ch.qos.logback:logback-classic:1.5.0")
 
