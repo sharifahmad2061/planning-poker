@@ -13,4 +13,4 @@ new_round_form.addEventListener('submit', function (event) {
     event.preventDefault();
     let formData = new FormData(new_round_form);
     websocket_connection.send(JSON.stringify(formData));
-}
+});
