@@ -7,7 +7,7 @@
     <p>Session ID: {{sessionId}}</p>
     {% if user.isLeader %}
     <form id="new-round-form">
-        <input type="text" id="story-name" placeholder="Story Name" />
+        <input type="text" name="story-name" placeholder="Story Name" />
         <button type="submit">Start Vote</button>
     </form>
     {% endif %}
