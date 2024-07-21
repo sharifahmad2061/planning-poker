@@ -14,7 +14,7 @@ fun Application.module() {
     configureSessionAuthentication()
     configureSerialization()
     configureCallLogging()
-    configureRouting()
     configureWebSockets()
     configureTemplating()
+    configureRouting()
 }
