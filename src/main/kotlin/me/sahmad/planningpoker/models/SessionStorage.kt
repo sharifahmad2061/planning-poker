@@ -1,5 +1,7 @@
 package me.sahmad.planningpoker.models
 
+import io.ktor.server.websocket.WebSocketServerSession
+import java.util.Collections
 import java.util.UUID
 
 object SessionStorage {
@@ -9,6 +11,7 @@ object SessionStorage {
 data class Session (
     val users: List<User> = emptyList(),
     val completedPokerRounds: List<PokerRound> = emptyList(),
+    val webSocketSessions: MutableList<WebSocketServerSession> = mutableListOf()
 )
 
 data class PokerRound (
